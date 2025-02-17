@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Dao;
 
 import java.math.BigDecimal;
@@ -24,7 +21,7 @@ public class DespesasCustosDAO {
 		 
 	        boolean existe = false;
 
-	        // Substitua pelo seu método de obter conexão com o banco de dados
+	        
 	        try {
 	        	 String sql = "SELECT COUNT(*) FROM despesascusto WHERE despesascusto = ?";
 	             PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -41,11 +38,12 @@ public class DespesasCustosDAO {
 	        	e.printStackTrace();
 	            System.out.println("Erro no nivel dao: "+e.getMessage()); // Tratar exceções de forma adequada na sua aplicação
 	        }
-    System.out.println(existe);
+    
 	        return existe;
 	    }
 	
     // Método para criar uma nova despesa/custo no banco de dados
+	 
     public void create(DespesasCustos despesaCusto) throws SQLException {
     	 PostgresConnection conn = new PostgresConnection();
          Connection conexao= conn.getConnection();
@@ -101,7 +99,6 @@ public class DespesasCustosDAO {
         PostgresConnection conn = new PostgresConnection();
         Connection conexao= conn.getConnection();
         try  {
-        	System.out.println("unidade2:");
         	  String sql = "UPDATE despesascusto SET despesascusto = ?, unidadedespesascustos = ?, "
         	  		+ "valordespesascustos = ?, tipodespesascustos = ? WHERE iddespesascusto = ?";
         		PreparedStatement stmt = conexao.prepareStatement(sql);
@@ -162,8 +159,7 @@ public class DespesasCustosDAO {
     }
     public static String converterParaMoedaBrasileira(Double valor) {
         // Configurar o formatador para o Locale brasileiro
-        @SuppressWarnings("deprecation")
-		NumberFormat formatoBrasileiro = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
+        NumberFormat formatoBrasileiro = NumberFormat.getNumberInstance(new Locale("pt", "BR"));
         formatoBrasileiro.setMinimumFractionDigits(2);
         formatoBrasileiro.setMaximumFractionDigits(2);
         
