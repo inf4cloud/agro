@@ -39,4 +39,15 @@
     <servlet-name>DespesasCustosServlet</servlet-name>
     <url-pattern>/DespesasCustosServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AcessoLogin</display-name>
+    <servlet-name>AcessoLogin</servlet-name>
+    <servlet-class>Controller.AcessoLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AcessoLogin</servlet-name>
+    <url-pattern>/AcessoLogin</url-pattern>
+  </servlet-mapping>
+
 </web-app>
