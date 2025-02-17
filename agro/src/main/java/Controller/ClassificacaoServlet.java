@@ -74,72 +74,70 @@ public class ClassificacaoServlet extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				response.getWriter().write("{\"error\":\"Erro ao Excliur classificação: " + e.getMessage() + "\"}");
 			}
-		} else {
-			
-			String idParam = request.getParameter("id");
-			// String teste= request.getParameter("classificacao");
+		} else if("Update".equals(acao)) {
+			 String idParam = request.getParameter("id");
+				// String teste= request.getParameter("classificacao");
 
-			if (idParam != null && !idParam.trim().isEmpty()) {
-				try {
-					// Captura os parâmetros da requisição e adiciona logs para depuração
+				if (idParam != null && !idParam.trim().isEmpty()) {
+					try {
+						// Captura os parâmetros da requisição e adiciona logs para depuração
 
-					String classificacaoNome = request.getParameter("classificacao");
+						String classificacaoNome = request.getParameter("classificacao");
 
-					// Verifica se os parâmetros estão presentes e válidos
-					if (idParam == null || classificacaoNome == null || idParam.isEmpty()
-							|| classificacaoNome.isEmpty()) {
+						// Verifica se os parâmetros estão presentes e válidos
+						if (idParam == null || classificacaoNome == null || idParam.isEmpty()
+								|| classificacaoNome.isEmpty()) {
+							response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+							response.getWriter().write("{\"error\":\"ID ou classificação não fornecidos.\"}");
+							return;
+						}
+						int id = Integer.parseInt(idParam);
+
+						// Cria a instância do modelo e define os valores
+						Classificacao classificacao = new Classificacao();
+						classificacao.setIdclassificacao(id);
+						classificacao.setClassificacao(classificacaoNome);
+
+						// Chama o método de atualização no DAO
+						classificacaoDAO.updateClassificacao(classificacao);
+
+						// Envia resposta de sucesso
+						response.setStatus(HttpServletResponse.SC_OK);
+						response.getWriter().write("{\"message\":\"Classificação atualizada com sucesso!\"}");
+
+					} catch (NumberFormatException e) {
+						// Tratamento para caso o ID não seja um número válido
 						response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-						response.getWriter().write("{\"error\":\"ID ou classificação não fornecidos.\"}");
-						return;
+						response.getWriter().write("{\"error\":\"ID inválido.\"}");
+					} catch (Exception e) {
+						// Tratamento de erros gerais
+						e.printStackTrace();
+						response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+						response.getWriter()
+								.write("{\"error\":\"Erro ao atualizar classificação: " + e.getMessage() + "\"}");
+
+						}
+				} else if ("Create".equals(acao)) {
+					try {
+						String classificacaoNome = request.getParameter("classificacao");
+
+						// Cria uma nova instância do modelo Classificacao
+						Classificacao classificacao = new Classificacao();
+						classificacao.setClassificacao(classificacaoNome);
+
+						// Salva a nova classificação usando o DAO
+						classificacaoDAO.saveClassificacao(classificacao);
+
+						// Envia uma resposta de sucesso
+						response.setStatus(HttpServletResponse.SC_OK);
+						response.getWriter().write("{\"message\":\"Classificação cadastrada com sucesso!\"}");
+					} catch (Exception e) {
+						e.printStackTrace();
+						response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+						response.getWriter()
+								.write("{\"error\":\"Erro ao cadastrar classificação: " + e.getMessage() + "\"}");
 					}
-					int id = Integer.parseInt(idParam);
-
-					// Cria a instância do modelo e define os valores
-					Classificacao classificacao = new Classificacao();
-					classificacao.setIdclassificacao(id);
-					classificacao.setClassificacao(classificacaoNome);
-
-					// Chama o método de atualização no DAO
-					classificacaoDAO.updateClassificacao(classificacao);
-
-					// Envia resposta de sucesso
-					response.setStatus(HttpServletResponse.SC_OK);
-					response.getWriter().write("{\"message\":\"Classificação atualizada com sucesso!\"}");
-
-				} catch (NumberFormatException e) {
-					// Tratamento para caso o ID não seja um número válido
-					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					response.getWriter().write("{\"error\":\"ID inválido.\"}");
-				} catch (Exception e) {
-					// Tratamento de erros gerais
-					e.printStackTrace();
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					response.getWriter()
-							.write("{\"error\":\"Erro ao atualizar classificação: " + e.getMessage() + "\"}");
-
 				}
-			} else {
-				try {
-					// Recupera o valor do parâmetro 'classificacao' enviado no request
-					String classificacaoNome = request.getParameter("classificacao");
-
-					// Cria uma nova instância do modelo Classificacao
-					Classificacao classificacao = new Classificacao();
-					classificacao.setClassificacao(classificacaoNome);
-
-					// Salva a nova classificação usando o DAO
-					classificacaoDAO.saveClassificacao(classificacao);
-
-					// Envia uma resposta de sucesso
-					response.setStatus(HttpServletResponse.SC_OK);
-					response.getWriter().write("{\"message\":\"Classificação cadastrada com sucesso!\"}");
-				} catch (Exception e) {
-					e.printStackTrace();
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					response.getWriter()
-							.write("{\"error\":\"Erro ao cadastrar classificação: " + e.getMessage() + "\"}");
-				}
-			}
 
 		}
 	}
