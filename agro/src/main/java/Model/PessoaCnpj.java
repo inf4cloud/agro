@@ -2,14 +2,15 @@ package Model;
 
 public class PessoaCnpj extends Pessoa {
 
-    private String cnpjPessoaCnpj;
-    private String razaoSocialPessoaCnpj;
-    private String inscricaoEstadualPessoaCnpj;
+    protected String cnpjPessoaCnpj;
+    protected String razaoSocialPessoaCnpj;
+    protected String inscricaoEstadualPessoaCnpj;
 
-    public PessoaCnpj(int idpessoa, String nomepessoa, Endereco endereco, String usuariopessoa,
-            String senhapessoa, String nivelpessoa, boolean situacaopessoa, String emailpessoa, String telefonepessoa,
-            String cnpjPessoaCnpj, String razaoSocialPessoaCnpj, String inscricaoEstadualPessoaCnpj) {
-        super(idpessoa, nomepessoa, endereco, usuariopessoa, senhapessoa, nivelpessoa, situacaopessoa, emailpessoa, telefonepessoa);
+    public PessoaCnpj(int idPessoa, String nomePessoa, String usuarioPessoa, String senhaPessoa, String nivelPessoa,
+			boolean situacaoPessoa, String emailPessoa, String telefonePessoa, Endereco endereco, int numero,
+			String complemento, String cnpjPessoaCnpj, String razaoSocialPessoaCnpj, String inscricaoEstadualPessoaCnpj) {
+        super(idPessoa, nomePessoa, usuarioPessoa,  senhaPessoa,  nivelPessoa, situacaoPessoa, 
+        		emailPessoa, telefonePessoa,  endereco,numero, complemento);
         this.cnpjPessoaCnpj = cnpjPessoaCnpj;
         this.razaoSocialPessoaCnpj = razaoSocialPessoaCnpj;
         this.inscricaoEstadualPessoaCnpj = inscricaoEstadualPessoaCnpj;

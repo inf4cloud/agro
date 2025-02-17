@@ -3,16 +3,14 @@ package Model;
 
 
 public class Endereco {
-        private int idendereco;
+    private int idendereco;
 	private String Endereco; 
-	private int Numero;
-	private String Complemento;
 	private  String Cep;
-        private String Bairro;
+    private String Bairro;
 	private String Cidade;
 	private String Estado;
 	private String Pais;
-        private String localizacaogeografica;
+     
 
     public int getIdendereco() {
         return idendereco;
@@ -28,22 +26,6 @@ public class Endereco {
 
     public void setEndereco(String Endereco) {
         this.Endereco = Endereco;
-    }
-
-    public int getNumero() {
-        return Numero;
-    }
-
-    public void setNumero(int Numero) {
-        this.Numero = Numero;
-    }
-
-    public String getComplemento() {
-        return Complemento;
-    }
-
-    public void setComplemento(String Complemento) {
-        this.Complemento = Complemento;
     }
 
     public String getCep() {
@@ -86,25 +68,20 @@ public class Endereco {
         this.Pais = Pais;
     }
 
-    public String getLocalizacaogeografica() {
-        return localizacaogeografica;
-    }
+	public Endereco(int idendereco, String endereco, String cep, String bairro, String cidade, String estado,
+			String pais) {
+		super();
+		this.idendereco = idendereco;
+		Endereco = endereco;
+		Cep = cep;
+		Bairro = bairro;
+		Cidade = cidade;
+		Estado = estado;
+		Pais = pais;
+	}
 
-    public void setLocalizacaogeografica(String localizacaogeografica) {
-        this.localizacaogeografica = localizacaogeografica;
-    }
-
-    public Endereco(int idendereco, String Endereco, int Numero, String Complemento, String Cep, String Bairro, String Cidade, String Estado, String Pais, String localizacaogeografica) {
-        this.idendereco = idendereco;
-        this.Endereco = Endereco;
-        this.Numero = Numero;
-        this.Complemento = Complemento;
-        this.Cep = Cep;
-        this.Bairro = Bairro;
-        this.Cidade = Cidade;
-        this.Estado = Estado;
-        this.Pais = Pais;
-        this.localizacaogeografica = localizacaogeografica;
-    }
+	public Endereco() {
+		
+	}
     
 }
