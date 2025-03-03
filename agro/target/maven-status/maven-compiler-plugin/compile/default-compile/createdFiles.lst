@@ -1,0 +1,6 @@
+com\agro\agro\resources\JakartaEE10Resource.class
+Model\Dao\ClassificacaoDAO.class
+Model\Model\Classificacao.class
+Util\PostgresConnection.class
+com\agro\agro\JakartaRestConfiguration.class
+Controller\ClassificacaoServlet.class
